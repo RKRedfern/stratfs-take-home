@@ -1,11 +1,24 @@
 import React from 'react';
 
-const RowComponent = () => {
+const RowComponent = (props) => {
 
     return(
-        
-        <h1> Row Component </h1>
-        
+        <>
+        <tr>
+        <td>
+        <input
+            type="checkbox"
+            // checked={acct.isSelected}
+            // onChange={() => toggleSelectAccount(acct.id)}
+        />
+        </td>
+        <td>{props.account.creditorName}</td>
+        <td>{props.account.firstName}</td>
+        <td>{props.account.lastName}</td>
+        <td>{props.account.minPaymentPercentage}</td>
+        <td>${props.account.balance}</td>
+        </tr>
+        </>
     )
 }
 
