@@ -32,8 +32,7 @@ const Table = () => {
     }
 
     const addAccount = (formData) => {
-        console.log(formData, tableData)
-        setTableData({ ...tableData, formData })
+        setTableData([ ...tableData, formData ])
     }
 
     return(

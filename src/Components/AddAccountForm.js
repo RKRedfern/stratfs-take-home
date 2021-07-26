@@ -5,7 +5,8 @@ const AddAccountForm = (props) => {
     const defaultState = {creditorName: "", firstName: "", lastName: "", minPaymentPercentage: "", balance: ""}
     const [formInput, setFormInput] = useState(defaultState)
 
-    const submitHandler = (formInput) => {
+    const submitHandler = (e) => {
+        e.preventDefault()
         props.addAccount(formInput)
         setFormInput(defaultState)
     }
