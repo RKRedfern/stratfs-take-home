@@ -16,7 +16,7 @@ td {
   border: 1px solid #ffffff;
   text-align: left;
   padding: 8px;
-  font-size: 32px;
+  font-size: 20px;
 }
 
 th {
@@ -27,16 +27,12 @@ td {
   background-color: rgb(205, 235, 253);
 }
 
-form {
+/* form {
   display: flex;
   gap: 5px;
-}
-
-form td:last-child {
-  display: flex;
-  justify-content: space-evenly;
-}
+} */
 
 form * {
-  font-size: 28px;
+  font-size: 15px;
 }
+

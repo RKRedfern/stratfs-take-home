@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //import AddAccountForm from './AddAccountForm'
 import RowComponent from './RowComponent'
-import Headings from './Headings'
+//import Headings from './Headings'
 import AddAccountForm from './AddAccountForm';
 
 const Table = () => {
@@ -29,6 +29,11 @@ const Table = () => {
 
     const displayToyForm = () => {
         setFormDisplay(!formDisplay)
+    }
+
+    const addAccount = (formData) => {
+        console.log(formData, tableData)
+        setTableData({ ...tableData, formData })
     }
 
     return(
@@ -68,7 +73,7 @@ const Table = () => {
                     <th> {accountSum} </th>
                 </tfoot>
             </table>
-            {formDisplay ? <AddAccountForm /> : null }
+            {formDisplay ? <AddAccountForm addAccount={addAccount} /> : null }
         </div>
     )
 }
