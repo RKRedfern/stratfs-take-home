@@ -39,17 +39,17 @@ const Table = () => {
         setTableData([ ...tableData, formData ])
     }
 
-    // const toggleSelectAccount = (id) => {
-    //     const updatedAccountData = tableData.map((acct) => {
-    //         if (acct.id !== id) return acct;
-    //         if (acct.isSelected && selectAll) setSelectAll(false);
-    //         setNumSelected((numSelected) =>
-    //             acct.isSelected ? numSelected - 1 : numSelected + 1
-    //         );
-    //         return { ...acct, isSelected: !acct.isSelected };
-    //     });
-    //     setTableData(updatedAccountData);
-    // };
+    const toggleSelectAccount = (id) => {
+        const updatedAccountData = tableData.map((acct) => {
+            if (acct.id !== id) return acct;
+            if (acct.isSelected && selectAll) setSelectAll(false);
+            setNumSelected((numSelected) =>
+                acct.isSelected ? numSelected - 1 : numSelected + 1
+            );
+            return { ...acct, isSelected: !acct.isSelected };
+        });
+        setTableData(updatedAccountData);
+    };
 
     const toggleSelectAll = () => {
         const updatedAccountData = tableData.map((acct) => {
@@ -84,7 +84,7 @@ const Table = () => {
                 
                 {tableData.map(account => {
                     return(
-                    <RowComponent key={account.id} account={account} />
+                    <RowComponent key={account.id} account={account} toggle={toggleSelectAccount}/>
                     );
                 })}
                 
@@ -95,7 +95,7 @@ const Table = () => {
                     <th> Selected: {numSelected} </th>
                     <th> Row Count: {tableData.length} </th>
                     <th> Total: </th>
-                    <th> {accountSum} </th>
+                    <th> ${accountSum} </th>
                 </tfoot>
             </table>
             {formDisplay ? <AddAccountForm addAccount={addAccount} /> : null }
