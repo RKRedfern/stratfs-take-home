@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const RowComponent = (props) => {
+
+    
 
     return(
         <>
@@ -8,8 +10,8 @@ const RowComponent = (props) => {
         <td>
         <input
             type="checkbox"
-            // checked={acct.isSelected}
-            // onChange={() => toggleSelectAccount(acct.id)}
+            //checked={props.account.isSelected}
+            //onChange={toggleSelect(props.account.id)}
         />
         </td>
         <td>{props.account.creditorName}</td>

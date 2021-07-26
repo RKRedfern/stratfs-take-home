@@ -8,6 +8,8 @@ const Table = () => {
 
     const [tableData, setTableData] = useState([]);
     const [formDisplay, setFormDisplay] = useState(false)
+    const [selectAll, setSelectAll] = useState(false);
+    const [numSelected, setNumSelected] = useState(0);
 
     useEffect(() => {
         fetchData()
@@ -16,7 +18,9 @@ const Table = () => {
     const fetchData = () => {
         fetch('https://raw.githubusercontent.com/StrategicFS/Recruitment/master/data.json')
         .then(r => r.json())
-        .then(r => setTableData(r))
+        .then(r => setTableData(r.map((account) => {
+                return {...account, isSelected: false} 
+        })))
     }
 
     let accountSum = 0
@@ -27,13 +31,35 @@ const Table = () => {
         }
     }
 
-    const displayToyForm = () => {
+    const displayAccountForm = () => {
         setFormDisplay(!formDisplay)
     }
 
     const addAccount = (formData) => {
         setTableData([ ...tableData, formData ])
     }
+
+    // const toggleSelectAccount = (id) => {
+    //     const updatedAccountData = tableData.map((acct) => {
+    //         if (acct.id !== id) return acct;
+    //         if (acct.isSelected && selectAll) setSelectAll(false);
+    //         setNumSelected((numSelected) =>
+    //             acct.isSelected ? numSelected - 1 : numSelected + 1
+    //         );
+    //         return { ...acct, isSelected: !acct.isSelected };
+    //     });
+    //     setTableData(updatedAccountData);
+    // };
+
+    const toggleSelectAll = () => {
+        const updatedAccountData = tableData.map((acct) => {
+            return { ...acct, isSelected: !selectAll };
+        });
+        setNumSelected(selectAll ? 0 : tableData.length);
+        setSelectAll(!selectAll);
+        setTableData(updatedAccountData);
+    };
+
 
     return(
         <div className="Table">
@@ -42,8 +68,8 @@ const Table = () => {
                     <tr>
                         <th>
                         <input type="checkbox"
-                        //checked={selectAll}
-                        //onChange={toggleSelectAll}
+                            checked={selectAll}
+                        onChange={toggleSelectAll}
                         />
                         </th>
                         <th>Creditor Name</th>
@@ -58,15 +84,15 @@ const Table = () => {
                 
                 {tableData.map(account => {
                     return(
-                    <RowComponent key={account.id} account={account}/>
+                    <RowComponent key={account.id} account={account} />
                     );
                 })}
                 
                 </tbody>
                 <tfoot>
-                    <th> <button onClick={displayToyForm}> Add Account </button></th>
+                    <th> <button onClick={displayAccountForm}> Add Account </button></th>
                     <th> </th>
-                    <th> Selected: </th>
+                    <th> Selected: {numSelected} </th>
                     <th> Row Count: {tableData.length} </th>
                     <th> Total: </th>
                     <th> {accountSum} </th>
