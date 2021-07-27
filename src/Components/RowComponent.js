@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const RowComponent = (props) => {
-
-    const defaultState = props.account.isSelected
 
     const toggle = () => {
         props.toggle(props.account.id)
@@ -22,7 +20,7 @@ const RowComponent = (props) => {
         <td>{props.account.firstName}</td>
         <td>{props.account.lastName}</td>
         <td>{props.account.minPaymentPercentage}</td>
-        <td>${props.account.balance}</td>
+        <td>${props.account.balance.toLocaleString()}</td>
         </tr>
         </>
     )

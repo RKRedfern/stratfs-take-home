@@ -60,6 +60,13 @@ const Table = () => {
         setTableData(updatedAccountData);
     };
 
+    const deleteSelected = () => {
+        const updatedTableData = tableData.filter((account) => {
+            return !account.isSelected
+        })
+        setTableData(updatedTableData)
+    }
+
 
     return(
         <div className="Table">
@@ -91,11 +98,11 @@ const Table = () => {
                 </tbody>
                 <tfoot>
                     <th> <button onClick={displayAccountForm}> Add Account </button></th>
-                    <th> </th>
                     <th> Selected: {numSelected} </th>
+                    <th> <button onClick={deleteSelected}> Delete Selected </button></th>
                     <th> Row Count: {tableData.length} </th>
                     <th> Total: </th>
-                    <th> ${accountSum} </th>
+                    <th> ${accountSum.toLocaleString()} </th>
                 </tfoot>
             </table>
             {formDisplay ? <AddAccountForm addAccount={addAccount} /> : null }
