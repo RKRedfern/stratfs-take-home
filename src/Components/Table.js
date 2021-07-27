@@ -33,7 +33,6 @@ const Table = () => {
         setSum(accountSum)
     }
 
-
     const displayAccountForm = () => {
         setFormDisplay(!formDisplay)
     }
@@ -82,7 +81,6 @@ const Table = () => {
         })
         setTableData(updatedTableData)
     }
-
 
     return(
         <div className="Table">
