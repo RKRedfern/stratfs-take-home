@@ -8,12 +8,11 @@ const AddAccountForm = (props) => {
     const submitHandler = (e) => {
         e.preventDefault()
         props.addAccount(formInput)
+        props.display()
     }
 
     const changeHandler = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setFormInput({...formInput, [name]: value})
+        setFormInput({...formInput, [e.target.name]: e.target.value})
     }
 
     return(
@@ -26,11 +25,11 @@ const AddAccountForm = (props) => {
             <br/>
             <input type="text" name="lastName" placeholder="Last Name" className="input-text" onChange={changeHandler}/>
             <br/>
-            <input type="text" name="minPaymentPercentage" placeholder="%" className="input-text" onChange={changeHandler}/>
+            <input type="text" name="minPaymentPercentage" placeholder="%" className="input-text" onChange={changeHandler} />
             <br/>
             <input type="text" name="balance" placeholder="Balance" className="input-text" onChange={changeHandler}/>
             <br/>
-            <input type="submit" name="submit" value="Create Account" className="submit"/>
+            <input type="submit" name="submit" value="Create Account" className="submit" />
             </form>
         </>
     )

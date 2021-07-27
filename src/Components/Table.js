@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-//import AddAccountForm from './AddAccountForm'
 import RowComponent from './RowComponent'
-//import Headings from './Headings'
 import AddAccountForm from './AddAccountForm';
 
 const Table = () => {
@@ -100,14 +98,14 @@ const Table = () => {
                 </tbody>
                 <tfoot>
                     <th> <button onClick={displayAccountForm}> Add Account </button></th>
-                    <th> Selected: {numSelected} </th>
                     <th> <button onClick={deleteSelected}> Delete Selected </button></th>
+                    <th> Selected: {numSelected} </th>
                     <th> Row Count: {tableData.length} </th>
                     <th> Total: </th>
-                    <th> ${accountSum()} </th>
+                    <th>  </th>
                 </tfoot>
             </table>
-            {formDisplay ? <AddAccountForm addAccount={addAccount} /> : null }
+            {formDisplay ? <AddAccountForm addAccount={addAccount} display={displayAccountForm}/> : null }
         </div>
     )
 }
