@@ -8,6 +8,7 @@ const Table = () => {
     const [formDisplay, setFormDisplay] = useState(false)
     const [selectAll, setSelectAll] = useState(false);
     const [numSelected, setNumSelected] = useState(0);
+    const [sum, setSum] = useState(0)
 
     useEffect(() => {
         fetchData()
@@ -19,23 +20,38 @@ const Table = () => {
         .then(r => setTableData(r.map((account) => {
                 return {...account, isSelected: false} 
         })))
+        
     }
 
     const accountSum = () => {
+        let accountSum = 0
         if(tableData.length > 0){
-            let arr = tableData.map((account) => {
-                return account.balance
-            })
-            const sum = arr.reduce((a,b) => a + b)
-            return sum;
+            for(let i = 0; i < tableData.length; i++){
+                accountSum += tableData[i].balance
+            }
         }
+        setSum(accountSum)
     }
+
 
     const displayAccountForm = () => {
         setFormDisplay(!formDisplay)
     }
 
     const addAccount = (formData) => {
+        // fetch('https://raw.githubusercontent.com/StrategicFS/Recruitment/master/data.json', {
+        //     method: "POST",
+        //     headers: {
+        //         "Accepts": "application/json",
+        //         "Content-type": "application/json"
+        //     },
+        //     body: JSON.stringify(formData)
+        // })
+        //     .then(r => r.json())
+        //     .then(newFormData => {
+        //     setTableData([ ...tableData, formData ])
+        // })
+
         setTableData([ ...tableData, formData ])
     }
 
@@ -91,21 +107,21 @@ const Table = () => {
                 
                 {tableData.map(account => {
                     return(
-                    <RowComponent key={account.id} account={account} toggle={toggleSelectAccount}/>
+                    <RowComponent key={account.id} account={account} toggle={toggleSelectAccount} />
                     );
                 })}
                 
                 </tbody>
                 <tfoot>
-                    <th> <button onClick={displayAccountForm}> Add Account </button></th>
-                    <th> <button onClick={deleteSelected}> Delete Selected </button></th>
-                    <th> Selected: {numSelected} </th>
-                    <th> Row Count: {tableData.length} </th>
-                    <th> Total: </th>
-                    <th>  </th>
+                    <td> <button onClick={displayAccountForm}> Add Account </button></td>
+                    <td> <button onClick={deleteSelected}> Delete Selected </button></td>
+                    <td> Selected: {numSelected} </td>
+                    <td> Row Count: {tableData.length} </td>
+                    <td> <button onClick={accountSum}> Sum Total: </button> </td>
+                    <td> ${sum.toLocaleString()} </td>
                 </tfoot>
             </table>
-            {formDisplay ? <AddAccountForm addAccount={addAccount} display={displayAccountForm}/> : null }
+            {formDisplay ? <AddAccountForm addAccount={addAccount} display={displayAccountForm} sum={accountSum}/> : null }
         </div>
     )
 }

@@ -2,13 +2,21 @@ import React, { useState } from 'react';
 
 const AddAccountForm = (props) => {
 
-    const defaultState = {creditorName: "", firstName: "", lastName: "", minPaymentPercentage: "", balance: ""}
+    const defaultState = {
+        creditorName: "", 
+        firstName: "", 
+        lastName: "", 
+        minPaymentPercentage: "", 
+        balance: 0
+    }
+
     const [formInput, setFormInput] = useState(defaultState)
 
     const submitHandler = (e) => {
         e.preventDefault()
         props.addAccount(formInput)
         props.display()
+        props.sum()
     }
 
     const changeHandler = (e) => {

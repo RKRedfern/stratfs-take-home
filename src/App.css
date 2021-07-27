@@ -36,3 +36,6 @@ form * {
   font-size: 15px;
 }
 
+tfoot {
+  background-color: rgb(117, 201, 250);
+}
