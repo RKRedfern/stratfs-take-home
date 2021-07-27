@@ -8,7 +8,6 @@ const AddAccountForm = (props) => {
     const submitHandler = (e) => {
         e.preventDefault()
         props.addAccount(formInput)
-        setFormInput(defaultState)
     }
 
     const changeHandler = (e) => {
@@ -22,8 +21,6 @@ const AddAccountForm = (props) => {
             <form className="add-account-form" onSubmit={submitHandler}>
             <h3> Add Another Account </h3>
             <input type="text" name="creditorName" placeholder="Creditor Name" className="input-text" onChange={changeHandler}/>
-            <br/>
-            <input type="text" name="firstName" placeholder="First Name" className="input-text" onChange={changeHandler}/>
             <br/>
             <input type="text" name="firstName" placeholder="First Name" className="input-text" onChange={changeHandler}/>
             <br/>

@@ -23,11 +23,13 @@ const Table = () => {
         })))
     }
 
-    let accountSum = 0
-
-    if(tableData.length > 0){
-        for(let i = 0; i < tableData.length; i++){
-            accountSum += tableData[i].balance
+    const accountSum = () => {
+        if(tableData.length > 0){
+            let arr = tableData.map((account) => {
+                return account.balance
+            })
+            const sum = arr.reduce((a,b) => a + b)
+            return sum;
         }
     }
 
@@ -102,7 +104,7 @@ const Table = () => {
                     <th> <button onClick={deleteSelected}> Delete Selected </button></th>
                     <th> Row Count: {tableData.length} </th>
                     <th> Total: </th>
-                    <th> ${accountSum.toLocaleString()} </th>
+                    <th> ${accountSum()} </th>
                 </tfoot>
             </table>
             {formDisplay ? <AddAccountForm addAccount={addAccount} /> : null }
